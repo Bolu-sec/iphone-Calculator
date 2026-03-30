@@ -1,121 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>iPhone Calculator</title>
-<style>
+  <title>Normal Calculator</title>
+  <style>
     body {
-        background: black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
     }
-
     .calculator {
-        width: 300px;
+      background-color: rgb(31, 43, 151);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
     }
-
-    .display {
-        color: white;
-        font-size: 3rem;
-        text-align: right;
-        padding: 20px;
-        word-wrap: break-word;
+    #display {
+      width: 100%;
+      height: 50px;
+      font-size: 24px;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 5px;
     }
-
-    .buttons {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-    }
-
     button {
-        height: 70px;
-        font-size: 1.5rem;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      font-size: 18px;
+      cursor: pointer;
     }
-
-    .gray {
-        background: #a5a5a5;
-        color: black;
+    .wide {
+      width: 110px;
     }
-
-    .dark {
-        background: #333;
-        color: white;
-    }
-
-    .orange {
-        background: orange;
-        color: white;
-    }
-
-    .zero {
-        grid-column: span 2;
-        border-radius: 35px;
-        text-align: left;
-        padding-left: 25px;
-    }
-</style>
+  </style>
 </head>
-
 <body>
 
 <div class="calculator">
-    <div class="display" id="display">0</div>
+  <input type="text" id="display" disabled>
 
-    <div class="buttons">
-        <button class="gray" onclick="clearDisplay()">AC</button>
-        <button class="gray" onclick="append('%')">%</button>
-        <button class="gray" onclick="append('/')">÷</button>
-        <button class="orange" onclick="append('*')">×</button>
+  <br>
+  <button onclick="add('7')">7</button>
+  <button onclick="add('8')">8</button>
+  <button onclick="add('9')">9</button>
+  <button onclick="add('/')">÷</button><br>
 
-        <button class="dark" onclick="append('7')">7</button>
-        <button class="dark" onclick="append('8')">8</button>
-        <button class="dark" onclick="append('9')">9</button>
-        <button class="orange" onclick="append('-')">−</button>
+  <button onclick="add('4')">4</button>
+  <button onclick="add('5')">5</button>
+  <button onclick="add('6')">6</button>
+  <button onclick="add('*')">×</button><br>
 
-        <button class="dark" onclick="append('4')">4</button>
-        <button class="dark" onclick="append('5')">5</button>
-        <button class="dark" onclick="append('6')">6</button>
-        <button class="orange" onclick="append('+')">+</button>
+  <button onclick="add('1')">1</button>
+  <button onclick="add('2')">2</button>
+  <button onclick="add('3')">3</button>
+  <button onclick="add('-')">−</button><br>
 
-        <button class="dark" onclick="append('1')">1</button>
-        <button class="dark" onclick="append('2')">2</button>
-        <button class="dark" onclick="append('3')">3</button>
-        <button class="orange" onclick="calculate()">=</button>
+  <button onclick="add('0')">0</button>
+  <button onclick="add('.')">.</button>
+  <button onclick="calculate()">=</button>
+  <button onclick="add('+')">+</button><br>
 
-        <button class="dark zero" onclick="append('0')">0</button>
-        <button class="dark" onclick="append('.')">.</button>
-    </div>
+  <button onclick="clearDisplay()" class="wide">Clear</button>
 </div>
 
 <script>
-    let display = document.getElementById("display");
+let display = document.getElementById("display");
 
-    function append(value) {
-        if (display.innerText === "0") {
-            display.innerText = value;
-        } else {
-            display.innerText += value;
-        }
-    }
+function add(value) {
+  display.value += value;
+}
 
-    function clearDisplay() {
-        display.innerText = "0";
-    }
+function calculate() {
+  try {
+    display.value = eval(display.value);
+  } catch {
+    display.value = "Error";
+  }
+}
 
-    function calculate() {
-        try {
-            display.innerText = eval(display.innerText);
-        } catch {
-            display.innerText = "Error";
-        }
-    }
+function clearDisplay() {
+  display.value = "";
+}
 </script>
 
 </body>
